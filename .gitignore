@@ -1,3 +1,5 @@
+node_modules
+
 packages/unique-types/node_modules/
 packages/unique-types/build/
 packages/unique-types/lib/
