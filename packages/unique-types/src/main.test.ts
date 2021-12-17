@@ -1,9 +1,15 @@
-import { greet } from './main'
+import { VerifiedType, TypeVerificationError } from "./main";
 
-test('the data is peanut butter', () => {
-  expect(1).toBe(1)
-});
+declare const IntegerTag: unique symbol;
+const Integer = VerifiedType<number, typeof IntegerTag>(
+  (n) => parseInt(n.toString()) === n
+);
 
-test('greeting', () => {
-  expect(greet('Foo')).toBe('Hello Foo')
+describe("verified type", () => {
+  it(`can be created`, () => {
+    expect(Integer.create(2)).toEqual(2);
+  });
+  it(`rejects value that fails verification`, () => {
+    expect(() => Integer.create(1.5)).toThrow(TypeVerificationError);
+  });
 });

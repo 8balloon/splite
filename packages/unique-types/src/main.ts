@@ -1,10 +1,26 @@
-export const delayMillis = (delayMs: number): Promise<void> => new Promise(resolve => setTimeout(resolve, delayMs));
+export type Signed<T, UuniqueSymbolSignature extends symbol> = T & {
+  signature: UuniqueSymbolSignature;
+};
 
-export const greet = (name: string): string => `Hello ${name}`
+export class TypeVerificationError extends TypeError {}
 
-export const foo = async (): Promise<boolean> => {
-  console.log(greet('World'))
-  await delayMillis(1000)
-  console.log('done')
-  return true
+export function VerifiedType<T, UuniqueSymbolSignature extends symbol>(
+  verifies: (candidate: T) => boolean
+) {
+  return {
+    create(base: T) {
+      if (verifies(base) === false) {
+        throw new TypeVerificationError();
+      }
+      return base as Signed<T, UuniqueSymbolSignature>;
+    },
+    verifies,
+  };
 }
+
+// TODO: async support
+
+/*
+^^ SIGNED types (verified types? verified = signed + checked) (include & { signature: uniqueSignatureSymbol })
+BRANDED types: https://medium.com/@KevinBGreene/surviving-the-typescript-ecosystem-branding-and-type-tagging-6cf6e516523d / https://github.com/pelotom/runtypes
+*/
