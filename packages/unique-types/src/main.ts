@@ -18,6 +18,20 @@ export function VerifiedType<T, UuniqueSymbolSignature extends symbol>(
   };
 }
 
+export function VerifiedTypeAsync<T, UuniqueSymbolSignature extends symbol>(
+  verifies: (candidate: T) => Promise<boolean>
+) {
+  return {
+    async create(base: T) {
+      if ((await verifies(base)) === false) {
+        throw new TypeVerificationError();
+      }
+      return base as Signed<T, UuniqueSymbolSignature>;
+    },
+    verifies,
+  };
+}
+
 // TODO: async support
 
 /*
