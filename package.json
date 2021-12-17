@@ -2,7 +2,7 @@
   "name": "root",
   "private": true,
   "scripts": {
-    "types": "lerna exec --scope @splite/unique-types --"
+    "types": "lerna exec --scope @splite/autographed-types --"
   },
   "devDependencies": {
     "@types/jest": "^26.0.21",
@@ -19,6 +19,6 @@
     "typescript": "^4.2.3"
   },
   "dependencies": {
-    "@splite/unique-types": "file:packages/unique-types"
+    "@splite/autographed-types": "file:packages/autographed-types"
   }
 }

@@ -1,11 +1,11 @@
 node_modules
 
-packages/unique-types/node_modules/
-packages/unique-types/build/
-packages/unique-types/lib/
-packages/unique-types/dist/
-packages/unique-types/docs/
-packages/unique-types/.idea/*
-packages/unique-types/.DS_Store
-packages/unique-types/coverage
-packages/unique-types/*.log
+packages/autographed-types/node_modules/
+packages/autographed-types/build/
+packages/autographed-types/lib/
+packages/autographed-types/dist/
+packages/autographed-types/docs/
+packages/autographed-types/.idea/*
+packages/autographed-types/.DS_Store
+packages/autographed-types/coverage
+packages/autographed-types/*.log
