@@ -35,7 +35,6 @@
     "url": "https://github.com/8balloon/splite/issues"
   },
   "scripts": {
-    "TODO": "was a note here saying 'run tests from root'; may want to look into that pattern",
     "cli": "ts-node src/cli.ts",
     "lint": "eslint src/ --ext .js,.jsx,.ts,.tsx",
     "test": "jest",

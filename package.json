@@ -1,6 +1,9 @@
 {
   "name": "root",
   "private": true,
+  "scripts": {
+    "types": "lerna exec --scope @splite/unique-types --"
+  },
   "devDependencies": {
     "@types/jest": "^26.0.21",
     "@types/node": "^15.0.1",
