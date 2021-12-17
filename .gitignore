@@ -1,0 +1,9 @@
+packages/unique-types/node_modules/
+packages/unique-types/build/
+packages/unique-types/lib/
+packages/unique-types/dist/
+packages/unique-types/docs/
+packages/unique-types/.idea/*
+packages/unique-types/.DS_Store
+packages/unique-types/coverage
+packages/unique-types/*.log
