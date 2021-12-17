@@ -1,33 +1,52 @@
-export type autographed<T, UuniqueSymbolAutograph extends symbol> = T & {
-  autograph: UuniqueSymbolAutograph;
+export type tested<T, UTestSignatureUniqueSymbol extends symbol> = T & {
+  testSignature: UTestSignatureUniqueSymbol;
 };
 
-export class AutographError extends TypeError {}
+export class TypeTestError extends TypeError {}
 
-export function AutographedType<T, UuniqueSymbolAutograph extends symbol>(
-  accepts: (candidate: T) => boolean
+export function TestedType<T, UTestOkUniqueSymol extends symbol>(
+  test: (value: T) => boolean
 ) {
+  function testSafe(value: T) {
+    if (test(value) === false) {
+      return null;
+    } else {
+      return value as tested<T, UTestOkUniqueSymol>;
+    }
+  }
   return {
-    sign(base: T) {
-      if (accepts(base) === false) {
-        throw new AutographError();
+    test(value: T) {
+      const result = testSafe(value);
+      if (result === null) {
+        throw new TypeTestError();
       }
-      return base as autographed<T, UuniqueSymbolAutograph>;
+      return result;
     },
-    accepts,
+    testSafe(value: T) {
+      const result = testSafe(value);
+      return result as tested<T, UTestOkUniqueSymol> | null;
+    },
   };
 }
 
-export function AutographedTypeAsync<T, UuniqueSymbolAutograph extends symbol>(
-  accepts: (candidate: T) => Promise<boolean>
+export function TestedTypeAsync<T, UTestOkUniqueSymol extends symbol>(
+  test: (value: T) => Promise<boolean>
 ) {
+  async function testSafe(value: T) {
+    if ((await test(value)) === false) {
+      return null;
+    } else {
+      return value as tested<T, UTestOkUniqueSymol>;
+    }
+  }
   return {
-    async sign(base: T) {
-      if ((await accepts(base)) === false) {
-        throw new AutographError();
+    async test(value: T) {
+      const result = await testSafe(value);
+      if (result === null) {
+        throw new TypeTestError();
       }
-      return base as autographed<T, UuniqueSymbolAutograph>;
+      return result;
     },
-    accepts,
+    testSafe,
   };
 }
