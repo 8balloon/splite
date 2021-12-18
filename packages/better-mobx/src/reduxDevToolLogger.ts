@@ -16,7 +16,7 @@ let reduxStore: typeof referenceStore | null = null;
 
 // set `nextState` to the state you want logged before `dispatch`ing
 let nextState: {} | null = null;
-const reducer = (_state, _action) => nextState;
+const reducer = (_state: any, _action: any /* TODO */) => nextState;
 
 let loggingForced = false;
 export function forceLogging() {

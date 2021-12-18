@@ -3,6 +3,7 @@
     "target": "es6",
     "module": "commonjs",
     "moduleResolution": "node",
+    "jsx": "react",
     "declaration": true,
     "strict": true,
     "noImplicitAny": true /* Raise error on expressions and declarations with an implied 'any' type. */,
@@ -24,6 +25,7 @@
     ],
     "lib": [
       "ES6",
+      "DOM"
     ]
   }
 }

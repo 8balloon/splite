@@ -1,11 +1,11 @@
-import { Suspense, FC, ComponentType } from "react";
+import * as React from "react";
 import { makeAutoObservable } from "mobx";
 import { observer } from "mobx-react";
 import { ensureInitialized, log } from "./reduxDevToolLogger";
 
-const stores = {};
+const stores: any = {};
 let storesJson = {};
-function updateStoresJson(storeName, storeBase) {
+function updateStoresJson(storeName: any, storeBase: any) {
   storesJson = {
     ...storesJson,
     [storeName]: JSON.parse(JSON.stringify(storeBase)),
@@ -14,7 +14,10 @@ function updateStoresJson(storeName, storeBase) {
 
 const stack: string[] = [];
 
-export function store<T extends object>(storeName: string, storeBase: T): T {
+export function store<T extends object>(
+  storeName: string,
+  storeBase: any /*T*/
+): T {
   if (stores[storeName]) {
     throw new Error(`storeName "${storeName}" is already in use`);
   }
@@ -26,7 +29,8 @@ export function store<T extends object>(storeName: string, storeBase: T): T {
     const { value } = Object.getOwnPropertyDescriptor(storeBase, key) || {};
     if (value instanceof Function) {
       const boundMethod = value.bind(storeBase);
-      storeBase[key] = (...args) => {
+      storeBase[key] = (...args: any) => {
+        // TODO: remove all `: any` declarations
         ensureInitialized(storesJson);
         const stackSnapshot = [...stack];
         const methodSignature = `${storeName}.${key}`;
@@ -49,17 +53,17 @@ export function store<T extends object>(storeName: string, storeBase: T): T {
 }
 
 export function view<T>(
-  ComponentOrFallback: ComponentType<T>,
-  ComponentAsSecondArg: ComponentType | null = null
-): ComponentType<T> {
+  ComponentOrFallback: React.ComponentType<T>,
+  ComponentAsSecondArg: React.ComponentType | null = null
+): React.ComponentType<T> {
   const Component = observer(ComponentAsSecondArg || ComponentOrFallback);
   const Fallback = ComponentAsSecondArg ? ComponentOrFallback : null;
   return (props) => {
     if (Fallback) {
       return (
-        <Suspense fallback={<Fallback {...props} />}>
+        <React.Suspense fallback={<Fallback {...props} />}>
           <Component {...props} />
-        </Suspense>
+        </React.Suspense>
       );
     } else {
       return <Component {...props} />;
