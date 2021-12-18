@@ -2,7 +2,8 @@
   "name": "root",
   "private": true,
   "scripts": {
-    "types": "lerna exec --scope tested-types --"
+    "types": "lerna exec --scope tested-types --",
+    "mobx": "lerna exec --scope better-mobx --"
   },
   "devDependencies": {
     "@types/jest": "^26.0.21",

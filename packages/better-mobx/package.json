@@ -1,15 +1,17 @@
 {
-  "name": "tested-types",
+  "name": "better-mobx",
   "version": "0.0.0",
-  "description": "types with verifiably tested values",
+  "description": "mobx, minus the endless options, plus redux devtool support",
   "keywords": [
-    "typescript",
-    "types",
-    "unique",
-    "generic"
+    "mobx",
+    "redux",
+    "devtools",
+    "reactive",
+    "computed",
+    "observable"
   ],
   "author": "Ethan Gregory Clark <ethangclark@gmail.com>",
-  "homepage": "https://github.com/8balloon/splite/tree/master/packages/tested-types",
+  "homepage": "https://github.com/8balloon/splite/tree/master/packages/better-mobx",
   "license": "MIT",
   "main": "./dist/tsc/main.js",
   "types": "./dist/tsc/main.d.ts",
