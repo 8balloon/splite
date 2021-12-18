@@ -1,11 +1,11 @@
-# `@splite/tested-types`
+# `tested-types`
 
 > TODO: description
 
 ## Usage
 
 ```
-const uniqueTypes = require('@splite/tested-types');
+const { TestedType } = require('tested-types');
 
 // TODO: DEMONSTRATE API
 ```
