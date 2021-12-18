@@ -20,9 +20,11 @@ describe("verified type", () => {
     expect(() => Integer.test(1.5)).toThrow(TypeTestError);
   });
   it(`works ok with testSafe`, () => {
-    const ts = Integer.testSafe;
-    let bad = Integer.testSafe(1.3); // REEEE
-    throw new Error("REEEE"); // type of above var is bad
+    const bad = Integer.testSafe(1.3);
+    // const b2: number = bad // should throw type error... it's not being picked up on though (at least in vscode). The "| null" condition is being lost
+    expect(bad).toBeNull();
+    const good = Integer.testSafe(4);
+    expect(good).toEqual(4);
   });
 });
 
@@ -46,7 +48,10 @@ describe("async verified type", () => {
     await expect(OddNumber.test(2)).rejects.toThrow(TypeTestError);
   });
   it(`works with testSafe`, async () => {
-    let result = await OddNumber.testSafe(2.3); // REEEE
-    throw new Error("REEEE"); // type of above var is bad
+    const good = await OddNumber.testSafe(5);
+    expect(good).toEqual(5);
+    const bad = await OddNumber.testSafe(2.3);
+    // const b2: number = bad // should throw type error... it's not being picked up on though (at least in vscode). The "| null" condition is being lost
+    expect(bad).toBeNull();
   });
 });

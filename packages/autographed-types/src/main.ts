@@ -4,14 +4,14 @@ export type tested<T, UTestSignatureUniqueSymbol extends symbol> = T & {
 
 export class TypeTestError extends TypeError {}
 
-export function TestedType<T, UTestOkUniqueSymol extends symbol>(
+export function TestedType<T, UTestSignatureUniqueSymbol extends symbol>(
   test: (value: T) => boolean
 ) {
   function testSafe(value: T) {
     if (test(value) === false) {
       return null;
     } else {
-      return value as tested<T, UTestOkUniqueSymol>;
+      return value as tested<T, UTestSignatureUniqueSymbol>;
     }
   }
   return {
@@ -22,21 +22,18 @@ export function TestedType<T, UTestOkUniqueSymol extends symbol>(
       }
       return result;
     },
-    testSafe(value: T) {
-      const result = testSafe(value);
-      return result as tested<T, UTestOkUniqueSymol> | null;
-    },
+    testSafe,
   };
 }
 
-export function TestedTypeAsync<T, UTestOkUniqueSymol extends symbol>(
+export function TestedTypeAsync<T, UTestSignatureUniqueSymbol extends symbol>(
   test: (value: T) => Promise<boolean>
 ) {
   async function testSafe(value: T) {
     if ((await test(value)) === false) {
       return null;
     } else {
-      return value as tested<T, UTestOkUniqueSymol>;
+      return value as tested<T, UTestSignatureUniqueSymbol>;
     }
   }
   return {
