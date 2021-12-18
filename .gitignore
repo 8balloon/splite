@@ -1,11 +1,11 @@
 node_modules
 
-packages/autographed-types/node_modules/
-packages/autographed-types/build/
-packages/autographed-types/lib/
-packages/autographed-types/dist/
-packages/autographed-types/docs/
-packages/autographed-types/.idea/*
-packages/autographed-types/.DS_Store
-packages/autographed-types/coverage
-packages/autographed-types/*.log
+packages/tested-types/node_modules/
+packages/tested-types/build/
+packages/tested-types/lib/
+packages/tested-types/dist/
+packages/tested-types/docs/
+packages/tested-types/.idea/*
+packages/tested-types/.DS_Store
+packages/tested-types/coverage
+packages/tested-types/*.log
